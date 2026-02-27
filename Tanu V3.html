@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tanushree Panigrahy | Executive Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Light Blue Theme */
+            --bg-color: #f0f9ff;   
+            --pane-bg: #e0f2fe;    
+            --text-main: #1e293b;  
+            --text-muted: #64748b; 
+            --accent: #0369a1;     
+            --accent-hover: #0284c7;
+            --btn-text: #ffffff;
+            --card-bg: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 400;
+            color: var(--accent);
+        }
+
+        /* Layout Architecture */
+        .layout-wrapper {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Left Pane: Sticky Anchor */
+        .left-pane {
+            width: 40%;
+            height: 100vh;
+            position: sticky;
+            top: 0;
+            background-color: var(--pane-bg);
+            padding: 8vh 4vw;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            border-right: 1px solid #d1e9f9;
+        }
+
+        .profile-image-container {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            background-color: #f1f5f9; 
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            font-size: 0.875rem;
+            border: 3px solid var(--accent); 
+            overflow: hidden; 
+            box-shadow: 0 10px 15px -3px rgba(3, 105, 161, 0.1);
+        }
+
+        .name-title {
+            font-size: 3.2rem;
+            line-height: 1.1;
+            margin-bottom: 1.2rem;
+            letter-spacing: -0.02em;
+        }
+
+        .elevator-pitch {
+            font-size: 1.05rem;
+            color: var(--text-muted);
+            max-width: 400px;
+            font-weight: 300;
+            margin-bottom: 2.5rem;
+            line-height: 1.7;
+        }
+
+        /* Dual CTAs */
+        .cta-container {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.875rem 1.5rem;
+            text-decoration: none;
+            font-size: 0.8rem;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border-radius: 4px; 
+        }
+
+        .btn-primary {
+            background-color: var(--accent);
+            color: var(--btn-text);
+            border: 1px solid var(--accent);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--accent-hover);
+            border-color: var(--accent-hover);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--accent);
+            border: 1px solid var(--accent);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--accent);
+            color: var(--btn-text);
+        }
+
+        /* Right Pane: Scrolling Content */
+        .right-pane {
+            width: 60%;
+            padding: 12vh 6vw;
+        }
+
+        /* Impact Stats (By the Numbers) */
+        .impact-stats {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5rem;
+            border-bottom: 1px solid #d1e9f9;
+            padding-bottom: 3rem;
+        }
+
+        .stat-item {
+            text-align: center;
+            flex: 1;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            color: var(--accent);
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        /* Pillars */
+        .pillar-card {
+            margin-bottom: 4rem; 
+        }
+
+        .pillar-number {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+            display: block;
+            border-bottom: 1px solid #d1e9f9;
+            padding-bottom: 0.5rem;
+            max-width: 30px;
+        }
+
+        .pillar-title {
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+            letter-spacing: -0.01em;
+        }
+
+        .pillar-desc {
+            font-size: 1.05rem;
+            color: var(--text-main); 
+            font-weight: 300;
+            line-height: 1.8; 
+        }
+
+        /* Credentials Gallery */
+        .credentials-section {
+            margin-top: 6rem;
+            margin-bottom: 5rem;
+            padding-top: 4rem;
+            border-top: 1px solid #d1e9f9;
+        }
+
+        .section-header {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .credentials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .credential-card {
+            background-color: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--accent);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .credential-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .cred-title {
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: 1rem;
+            color: var(--text-main);
+            margin-bottom: 0.5rem;
+        }
+
+        .cred-org {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        /* Thought Leadership Quote */
+        .quote-block {
+            margin-top: 6rem;
+            padding: 3rem;
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 10px 25px -5px rgba(3, 105, 161, 0.05);
+            position: relative;
+        }
+
+        .quote-block::before {
+            content: '"';
+            font-family: 'Playfair Display', serif;
+            font-size: 6rem;
+            color: var(--pane-bg);
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            line-height: 1;
+            z-index: 0;
+        }
+
+        .quote-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-style: italic;
+            color: var(--text-main);
+            position: relative;
+            z-index: 1;
+            margin-bottom: 1.5rem;
+        }
+
+        .quote-author {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Scroll Animations */
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .fade-in-section.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 960px) {
+            .layout-wrapper {
+                flex-direction: column;
+            }
+            .left-pane {
+                width: 100%;
+                height: auto;
+                position: relative;
+                padding: 4rem 2rem;
+                border-right: none;
+                border-bottom: 1px solid #d1e9f9;
+            }
+            .right-pane {
+                width: 100%;
+                padding: 3rem 2rem;
+            }
+            .impact-stats {
+                flex-direction: column;
+                gap: 2rem;
+                border-bottom: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <main class="layout-wrapper">
+        <section class="left-pane">
+            <div class="profile-image-container">
+                <span>[Your Image]</span>
+            </div>
+            <h1 class="name-title">Tanushree<br>Panigrahy</h1>
+            <p class="elevator-pitch">
+                A platform strategist, practice builder, and technical architect bridging enterprise service management, AI strategy, and consulting to drive digital transformation.
+            </p>
+            <div class="cta-container">
+                <a href="#" class="btn btn-primary">Download Resume</a>
+                <a href="#" class="btn btn-secondary">Connect on LinkedIn</a>
+            </div>
+        </section>
+
+        <section class="right-pane">
+            
+            <div class="impact-stats fade-in-section">
+                <div class="stat-item">
+                    <div class="stat-number">15+</div>
+                    <div class="stat-label">Years Experience</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">C-Level</div>
+                    <div class="stat-label">Executive Advisory</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">Enterprise Delivery</div>
+                </div>
+            </div>
+
+            <div class="pillar-card fade-in-section">
+                <span class="pillar-number">01</span>
+                <h2 class="pillar-title">Practice Strategy and GTM Leadership</h2>
+                <p class="pillar-desc">
+                    A proven leader in designing and executing robust Go-To-Market initiatives. Leveraged deep industry experience to build a specialized enterprise service offering from the ground up at NTT DATA, and subsequently spearheaded complex partner strategies at Atlassian, converting technical innovation into scalable, market-ready, and revenue-generating solutions.
+                </p>
+            </div>
+
+            <div class="pillar-card fade-in-section">
+                <span class="pillar-number">02</span>
+                <h2 class="pillar-title">Enterprise AI and Platforms Architecture</h2>
+                <p class="pillar-desc">
+                    Specialized architect spanning AIOps, Enterprise Service Management (ESM), and modern cloud infrastructure. Expert in advising enterprise clients and translating complex, often fragmented, operational workflows into high-performing, automated, and horizontally scalable digital systems that meet rigorous compliance standards.
+                </p>
+            </div>
+
+            <div class="pillar-card fade-in-section">
+                <span class="pillar-number">03</span>
+                <h2 class="pillar-title">Executive Advisory and Deal Strategy</h2>
+                <p class="pillar-desc">
+                    Adept at navigating high-stakes business environments, serving as a trusted advisor to C-Suite stakeholders, particularly CIOs. Accomplished in winning high-value, competitive enterprise deals and guiding large organizations through multi-platform digital transformation journeys that align cutting-edge technology with strategic business outcomes.
+                </p>
+            </div>
+
+            <div class="credentials-section fade-in-section">
+                <h2 class="section-header">Licenses & Certifications</h2>
+                <div class="credentials-grid">
+                    <div class="credential-card">
+                        <div class="cred-title">ITIL Managing Professional (v4 & v5)</div>
+                        <div class="cred-org">Axelos</div>
+                    </div>
+                    <div class="credential-card">
+                        <div class="cred-title">ServiceNow Consulting & Architecture</div>
+                        <div class="cred-org">ServiceNow</div>
+                    </div>
+                    <div class="credential-card">
+                        <div class="cred-title">Atlassian ACP / ACA Platform Expertise</div>
+                        <div class="cred-org">Atlassian</div>
+                    </div>
+                    <div class="credential-card">
+                        <div class="cred-title">Enterprise AI Strategy & Adoption</div>
+                        <div class="cred-org">Executive Specialization</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="quote-block fade-in-section">
+                <p class="quote-text">"Digital transformation isn't just about implementing technology; it's about architecting intelligent platforms that empower people, streamline workflows, and drive measurable business outcomes at an enterprise scale."</p>
+                <div class="quote-author">— Tanushree Panigrahy</div>
+            </div>
+
+        </section>
+    </main>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const observerOptions = {
+                root: null,
+                rootMargin: "0px",
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            const sections = document.querySelectorAll('.fade-in-section');
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+        });
+    </script>
+</body>
+</html>
