@@ -6,104 +6,226 @@
     <title>Tanushree Panigrahy | Executive Portfolio</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
     <style>
         :root {
-            /* Light Blue Theme */
-            --bg-color: #f0f9ff;   
-            --pane-bg: #e0f2fe;    
-            --text-main: #1e293b;  
-            --text-muted: #64748b; 
-            --accent: #0369a1;     
-            --accent-hover: #0284c7;
-            --btn-text: #ffffff;
-            --card-bg: #ffffff;
+            --gradient-1: #0f0c29;
+            --gradient-2: #302b63;
+            --gradient-3: #24243e;
+            --accent: #7c3aed;
+            --accent-light: #a78bfa;
+            --accent-glow: rgba(124, 58, 237, 0.4);
+            --surface: rgba(255, 255, 255, 0.05);
+            --surface-hover: rgba(255, 255, 255, 0.1);
+            --surface-card: rgba(255, 255, 255, 0.07);
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --border: rgba(255, 255, 255, 0.08);
+            --border-accent: rgba(124, 58, 237, 0.3);
+            --cyan: #06b6d4;
+            --pink: #ec4899;
+            --amber: #f59e0b;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 80px;
         }
 
         body {
             font-family: 'Inter', sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-main);
+            background: linear-gradient(135deg, var(--gradient-1), var(--gradient-2), var(--gradient-3));
+            color: var(--text-primary);
             line-height: 1.6;
             -webkit-font-smoothing: antialiased;
-        }
-
-        h1, h2, h3 {
-            font-family: 'Playfair Display', serif;
-            font-weight: 400;
-            color: var(--accent);
-        }
-
-        /* Layout Architecture */
-        .layout-wrapper {
-            display: flex;
             min-height: 100vh;
         }
 
-        /* Left Pane: Sticky Anchor */
-        .left-pane {
-            width: 40%;
-            height: 100vh;
-            position: sticky;
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+        }
+
+        /* ========== NAVBAR ========== */
+        .navbar {
+            position: fixed;
             top: 0;
-            background-color: var(--pane-bg);
-            padding: 8vh 4vw;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 0 2rem;
+            height: 72px;
             display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(15, 12, 41, 0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            background: rgba(15, 12, 41, 0.95);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-brand {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--accent-light), var(--cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 0.03em;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent), var(--cyan));
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover { color: var(--text-primary); }
+        .nav-links a:hover::after { width: 100%; }
+
+        .nav-toggle {
+            display: none;
             flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            border-right: 1px solid #d1e9f9;
+            gap: 5px;
+            cursor: pointer;
+            padding: 4px;
         }
 
-        .profile-image-container {
-            width: 160px;
-            height: 160px;
-            border-radius: 50%;
-            background-color: #f1f5f9; 
-            margin-bottom: 2rem;
+        .nav-toggle span {
+            width: 24px;
+            height: 2px;
+            background: var(--text-secondary);
+            transition: all 0.3s ease;
+        }
+
+        /* ========== HERO ========== */
+        .hero {
+            min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--text-muted);
-            font-size: 0.875rem;
-            border: 3px solid var(--accent); 
-            overflow: hidden; 
-            box-shadow: 0 10px 15px -3px rgba(3, 105, 161, 0.1);
+            padding: 120px 2rem 80px;
+            position: relative;
+            overflow: hidden;
         }
 
-        /* Styling for the eventual image asset */
-        .profile-image-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover; /* Crucial secret sauce */
-            object-position: center;
+        .hero-bg-orbs {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+            pointer-events: none;
         }
 
-        .name-title {
-            font-size: 3.2rem;
-            line-height: 1.1;
-            margin-bottom: 1.2rem;
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.3;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .orb-1 {
+            width: 400px; height: 400px;
+            background: var(--accent);
+            top: 10%; left: 10%;
+        }
+
+        .orb-2 {
+            width: 300px; height: 300px;
+            background: var(--cyan);
+            bottom: 20%; right: 15%;
+            animation-delay: -3s;
+        }
+
+        .orb-3 {
+            width: 250px; height: 250px;
+            background: var(--pink);
+            top: 50%; left: 50%;
+            animation-delay: -5s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(30px, -30px) scale(1.05); }
+            66% { transform: translate(-20px, 20px) scale(0.95); }
+        }
+
+        .hero-content {
+            text-align: center;
+            max-width: 800px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            padding: 0.5rem 1.25rem;
+            background: var(--surface);
+            border: 1px solid var(--border-accent);
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--accent-light);
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            margin-bottom: 2rem;
+        }
+
+        .hero-title {
+            font-size: clamp(2.8rem, 6vw, 5rem);
+            line-height: 1.08;
+            margin-bottom: 1.5rem;
             letter-spacing: -0.02em;
         }
 
-        .elevator-pitch {
-            font-size: 1.05rem;
-            color: var(--text-muted);
-            max-width: 400px;
-            font-weight: 300;
-            margin-bottom: 2.5rem;
-            line-height: 1.7;
+        .hero-title .gradient-text {
+            background: linear-gradient(135deg, var(--accent-light), var(--cyan), var(--pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
-        /* Dual CTAs */
-        .cta-container {
+        .hero-subtitle {
+            font-size: 1.15rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 2.5rem;
+            font-weight: 300;
+            line-height: 1.8;
+        }
+
+        .hero-ctas {
             display: flex;
             gap: 1rem;
             justify-content: center;
@@ -111,338 +233,1026 @@
         }
 
         .btn {
-            display: inline-block;
-            padding: 0.875rem 1.5rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.9rem 1.8rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
             text-decoration: none;
-            font-size: 0.8rem;
-            letter-spacing: 0.05em;
+            letter-spacing: 0.03em;
             text-transform: uppercase;
-            font-weight: 500;
             transition: all 0.3s ease;
-            border-radius: 4px; 
+            cursor: pointer;
+            border: none;
         }
 
-        .btn-primary {
-            background-color: var(--accent);
-            color: var(--btn-text);
-            border: 1px solid var(--accent);
+        .btn-glow {
+            background: linear-gradient(135deg, var(--accent), #6d28d9);
+            color: #fff;
+            box-shadow: 0 4px 25px var(--accent-glow);
         }
 
-        .btn-primary:hover {
-            background-color: var(--accent-hover);
-            border-color: var(--accent-hover);
+        .btn-glow:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 40px var(--accent-glow);
         }
 
-        .btn-secondary {
-            background-color: transparent;
-            color: var(--accent);
-            border: 1px solid var(--accent);
+        .btn-outline {
+            background: transparent;
+            color: var(--text-primary);
+            border: 1px solid var(--border);
         }
 
-        .btn-secondary:hover {
-            background-color: var(--accent);
-            color: var(--btn-text);
+        .btn-outline:hover {
+            background: var(--surface);
+            border-color: var(--accent-light);
         }
 
-        /* Right Pane: Scrolling Content */
-        .right-pane {
-            width: 60%;
-            padding: 12vh 6vw;
-        }
-
-        /* Impact Stats (By the Numbers) */
-        .impact-stats {
+        /* Impact Counters in Hero */
+        .hero-stats {
             display: flex;
-            justify-content: space-between;
-            margin-bottom: 5rem;
-            border-bottom: 1px solid #d1e9f9;
-            padding-bottom: 3rem;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 4rem;
+            padding-top: 3rem;
+            border-top: 1px solid var(--border);
         }
 
-        .stat-item {
+        .hero-stat {
             text-align: center;
-            flex: 1;
         }
 
-        .stat-number {
-            font-size: 3rem;
-            color: var(--accent);
-            line-height: 1;
-            margin-bottom: 0.5rem;
+        .hero-stat-value {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--accent-light), var(--cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.2;
         }
 
-        .stat-label {
+        .hero-stat-label {
             font-size: 0.75rem;
             text-transform: uppercase;
             letter-spacing: 0.1em;
             color: var(--text-muted);
             font-weight: 600;
+            margin-top: 0.25rem;
         }
 
-        /* Pillars */
-        .pillar-card {
-            margin-bottom: 4rem; 
+        /* ========== SECTION SHARED ========== */
+        .section {
+            padding: 100px 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
-        .pillar-number {
-            font-family: 'Inter', sans-serif;
-            font-size: 0.875rem;
-            color: var(--text-muted);
-            margin-bottom: 0.5rem;
-            display: block;
-            border-bottom: 1px solid #d1e9f9;
-            padding-bottom: 0.5rem;
-            max-width: 30px;
+        .section-label {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--accent-light);
+            margin-bottom: 0.75rem;
         }
 
-        .pillar-title {
-            font-size: 2.2rem;
+        .section-title {
+            font-size: clamp(2rem, 4vw, 3rem);
             margin-bottom: 1rem;
-            line-height: 1.2;
-            letter-spacing: -0.01em;
+            line-height: 1.15;
         }
 
-        .pillar-desc {
+        .section-subtitle {
             font-size: 1.05rem;
-            color: var(--text-main); 
+            color: var(--text-secondary);
+            max-width: 600px;
             font-weight: 300;
-            line-height: 1.8; 
+            line-height: 1.7;
+            margin-bottom: 3rem;
         }
 
-        /* Credentials Gallery */
-        .credentials-section {
-            margin-top: 6rem;
-            margin-bottom: 5rem;
-            padding-top: 4rem;
-            border-top: 1px solid #d1e9f9;
-        }
-
-        .section-header {
-            font-size: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .credentials-grid {
+        /* ========== PILLARS / EXPERTISE ========== */
+        .pillars-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(3, 1fr);
             gap: 1.5rem;
         }
 
-        .credential-card {
-            background-color: var(--card-bg);
-            padding: 1.5rem;
-            border-radius: 8px;
-            border-left: 4px solid var(--accent);
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease;
-        }
-
-        .credential-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .cred-title {
-            font-family: 'Inter', sans-serif;
-            font-weight: 600;
-            font-size: 1rem;
-            color: var(--text-main);
-            margin-bottom: 0.5rem;
-        }
-
-        .cred-org {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-        }
-
-        /* Thought Leadership Quote */
-        .quote-block {
-            margin-top: 6rem;
-            padding: 3rem;
-            background-color: var(--card-bg);
-            border-radius: 8px;
-            text-align: center;
-            box-shadow: 0 10px 25px -5px rgba(3, 105, 161, 0.05);
+        .pillar-card {
+            background: var(--surface-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2.5rem 2rem;
+            transition: all 0.4s ease;
             position: relative;
+            overflow: hidden;
         }
 
-        .quote-block::before {
-            content: '"';
-            font-family: 'Playfair Display', serif;
-            font-size: 6rem;
-            color: var(--pane-bg);
+        .pillar-card::before {
+            content: '';
             position: absolute;
-            top: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            line-height: 1;
-            z-index: 0;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent), var(--cyan));
+            opacity: 0;
+            transition: opacity 0.4s ease;
         }
 
-        .quote-text {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.5rem;
-            font-style: italic;
-            color: var(--text-main);
-            position: relative;
-            z-index: 1;
+        .pillar-card:hover {
+            background: var(--surface-hover);
+            border-color: var(--border-accent);
+            transform: translateY(-4px);
+        }
+
+        .pillar-card:hover::before { opacity: 1; }
+
+        .pillar-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
             margin-bottom: 1.5rem;
         }
 
-        .quote-author {
-            font-size: 0.875rem;
+        .pillar-icon-1 { background: linear-gradient(135deg, rgba(124,58,237,0.2), rgba(124,58,237,0.05)); color: var(--accent-light); }
+        .pillar-icon-2 { background: linear-gradient(135deg, rgba(6,182,212,0.2), rgba(6,182,212,0.05)); color: var(--cyan); }
+        .pillar-icon-3 { background: linear-gradient(135deg, rgba(236,72,153,0.2), rgba(236,72,153,0.05)); color: var(--pink); }
+
+        .pillar-card h3 {
+            font-size: 1.35rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .pillar-card p {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            font-weight: 300;
+        }
+
+        /* ========== CREDENTIALS ========== */
+        .credentials-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.25rem;
+        }
+
+        .credential-card {
+            background: var(--surface-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.75rem 1.5rem;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .credential-card:hover {
+            border-color: var(--border-accent);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(124, 58, 237, 0.1);
+        }
+
+        .cred-badge {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, var(--accent), #6d28d9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.25rem;
+            font-size: 1rem;
+        }
+
+        .credential-card h4 {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
             font-weight: 600;
-            color: var(--accent);
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+            line-height: 1.4;
+        }
+
+        .credential-card .cred-org {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        /* ========== BLOG ========== */
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .blog-card {
+            background: var(--surface-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            cursor: pointer;
+        }
+
+        .blog-card:hover {
+            border-color: var(--border-accent);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(124, 58, 237, 0.12);
+        }
+
+        .blog-card-img {
+            height: 180px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .blog-card-img-1 { background: linear-gradient(135deg, #1e1b4b, #312e81); }
+        .blog-card-img-2 { background: linear-gradient(135deg, #0c4a6e, #155e75); }
+        .blog-card-img-3 { background: linear-gradient(135deg, #4a1d6e, #6b21a8); }
+
+        .blog-card-img span {
+            font-size: 3rem;
+            opacity: 0.4;
+        }
+
+        .blog-card-body {
+            padding: 1.5rem;
+        }
+
+        .blog-tag {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 50px;
+            font-size: 0.7rem;
+            font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.05em;
+            margin-bottom: 0.75rem;
         }
 
-        /* Scroll Animations */
-        .fade-in-section {
+        .tag-ai { background: rgba(124,58,237,0.15); color: var(--accent-light); }
+        .tag-platform { background: rgba(6,182,212,0.15); color: var(--cyan); }
+        .tag-leadership { background: rgba(236,72,153,0.15); color: var(--pink); }
+
+        .blog-card h3 {
+            font-size: 1.15rem;
+            margin-bottom: 0.75rem;
+            color: var(--text-primary);
+            line-height: 1.35;
+        }
+
+        .blog-card p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            font-weight: 300;
+        }
+
+        .blog-card-footer {
+            padding: 0 1.5rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .blog-date {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .blog-read-more {
+            font-size: 0.8rem;
+            color: var(--accent-light);
+            font-weight: 500;
+        }
+
+        /* ========== BLOG MODAL ========== */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+            visibility: hidden;
+            transition: all 0.3s ease;
         }
 
-        .fade-in-section.is-visible {
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal {
+            background: linear-gradient(180deg, #1e1b4b, var(--gradient-3));
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            width: 90%;
+            max-width: 720px;
+            max-height: 85vh;
+            overflow-y: auto;
+            transform: translateY(20px) scale(0.97);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .modal-overlay.active .modal {
+            transform: translateY(0) scale(1);
+        }
+
+        .modal-header-img {
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 20px 20px 0 0;
+            position: relative;
+        }
+
+        .modal-header-img span {
+            font-size: 4rem;
+            opacity: 0.3;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: #fff;
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            z-index: 1;
+        }
+
+        .modal-close:hover {
+            background: rgba(124, 58, 237, 0.7);
+        }
+
+        .modal-body {
+            padding: 2rem 2.5rem 2.5rem;
+        }
+
+        .modal-body .blog-tag { margin-bottom: 1rem; }
+
+        .modal-body h2 {
+            font-size: 1.8rem;
+            margin-bottom: 0.75rem;
+            line-height: 1.25;
+        }
+
+        .modal-meta {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .modal-body .blog-content p {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            line-height: 1.85;
+            margin-bottom: 1.25rem;
+            font-weight: 300;
+        }
+
+        .modal-body .blog-content h3 {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin: 2rem 0 0.75rem;
+        }
+
+        /* ========== VIDEOS ========== */
+        .videos-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+
+        .video-card {
+            background: var(--surface-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .video-card:hover {
+            border-color: var(--border-accent);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(124, 58, 237, 0.12);
+        }
+
+        .video-embed {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            background: rgba(0,0,0,0.3);
+        }
+
+        .video-embed iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .video-placeholder {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .play-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent), #6d28d9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 20px var(--accent-glow);
+        }
+
+        .video-card-body {
+            padding: 1.25rem 1.5rem;
+        }
+
+        .video-card-body h3 {
+            font-size: 1.1rem;
+            color: var(--text-primary);
+            margin-bottom: 0.4rem;
+        }
+
+        .video-card-body p {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            font-weight: 300;
+        }
+
+        /* ========== QUOTE ========== */
+        .quote-section {
+            padding: 80px 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .quote-large {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.4rem, 3vw, 1.8rem);
+            font-style: italic;
+            color: var(--text-primary);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .quote-large::before {
+            content: '\201C';
+            font-size: 5rem;
+            color: var(--accent);
+            opacity: 0.3;
+            position: absolute;
+            top: -2.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            line-height: 1;
+        }
+
+        .quote-author {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--accent-light);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        /* ========== FOOTER ========== */
+        .footer {
+            padding: 3rem 2rem;
+            text-align: center;
+            border-top: 1px solid var(--border);
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover { color: var(--accent-light); }
+
+        .footer p {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        /* ========== SCROLL ANIMATIONS ========== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                        transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal.visible {
             opacity: 1;
             transform: translateY(0);
         }
 
-        /* Mobile Responsiveness */
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.2s; }
+        .reveal-delay-3 { transition-delay: 0.3s; }
+
+        /* ========== DIVIDER ========== */
+        .section-divider {
+            max-width: 1200px;
+            margin: 0 auto;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--border-accent), transparent);
+        }
+
+        /* ========== SCROLLBAR ========== */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--gradient-1); }
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent);
+            border-radius: 4px;
+        }
+
+        /* ========== RESPONSIVE ========== */
         @media (max-width: 960px) {
-            .layout-wrapper {
+            .nav-links { display: none; }
+            .nav-links.open {
+                display: flex;
                 flex-direction: column;
+                position: absolute;
+                top: 72px;
+                left: 0;
+                right: 0;
+                background: rgba(15, 12, 41, 0.97);
+                padding: 1.5rem 2rem;
+                gap: 1rem;
+                border-bottom: 1px solid var(--border);
             }
-            .left-pane {
-                width: 100%;
-                height: auto;
-                position: relative;
-                padding: 4rem 2rem;
-                border-right: none;
-                border-bottom: 1px solid #d1e9f9;
+            .nav-toggle { display: flex; }
+
+            .hero-stats { flex-direction: column; gap: 1.5rem; }
+            .pillars-grid { grid-template-columns: 1fr; }
+            .credentials-grid { grid-template-columns: repeat(2, 1fr); }
+            .blog-grid { grid-template-columns: 1fr; }
+            .videos-grid { grid-template-columns: 1fr; }
+
+            .modal {
+                width: 95%;
+                max-height: 90vh;
             }
-            .right-pane {
-                width: 100%;
-                padding: 3rem 2rem;
-            }
-            .impact-stats {
-                flex-direction: column;
-                gap: 2rem;
-                border-bottom: none;
-            }
+
+            .modal-body { padding: 1.5rem; }
+        }
+
+        @media (max-width: 600px) {
+            .hero { padding: 100px 1.25rem 60px; }
+            .section { padding: 60px 1.25rem; }
+            .credentials-grid { grid-template-columns: 1fr; }
+            .hero-stats { gap: 1rem; }
         }
     </style>
 </head>
 <body>
 
-    <main class="layout-wrapper">
-        <section class="left-pane">
-            <div class="profile-image-container">
-                <img src="tanushree-executive-portrait.png" alt="Tanushree Panigrahy, Executive Leader">
-            </div>
-            <h1 class="name-title">Tanushree<br>Panigrahy</h1>
-            <p class="elevator-pitch">
-                A platform strategist, practice builder, and technical architect bridging enterprise service management, AI strategy, and consulting to drive digital transformation.
+    <!-- NAVBAR -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-brand">TP</div>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#expertise">Expertise</a></li>
+            <li><a href="#credentials">Credentials</a></li>
+            <li><a href="#blog">Blog</a></li>
+            <li><a href="#videos">Videos</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <div class="nav-toggle" id="navToggle" onclick="toggleNav()">
+            <span></span><span></span><span></span>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero" id="hero">
+        <div class="hero-bg-orbs">
+            <div class="orb orb-1"></div>
+            <div class="orb orb-2"></div>
+            <div class="orb orb-3"></div>
+        </div>
+        <div class="hero-content">
+            <div class="hero-badge">Platform Strategist &bull; Technical Architect</div>
+            <h1 class="hero-title">
+                Tanushree<br><span class="gradient-text">Panigrahy</span>
+            </h1>
+            <p class="hero-subtitle">
+                Bridging enterprise service management, AI strategy, and consulting to drive digital transformation at scale.
             </p>
-            <div class="cta-container">
-                <a href="Tanushree_Panigrahy_Resume.pdf" target="_blank" class="btn btn-primary">Download Resume</a>
-                <a href="https://www.linkedin.com/in/tanushree-panigrahy-a2693b15/" target="_blank" class="btn btn-secondary">Connect on LinkedIn</a>
+            <div class="hero-ctas">
+                <a href="#" class="btn btn-glow">
+                    <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/><path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/></svg>
+                    Download Resume
+                </a>
+                <a href="#" class="btn btn-outline">
+                    <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016a5.54 5.54 0 0 1 .016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225h2.4z"/></svg>
+                    Connect on LinkedIn
+                </a>
             </div>
-        </section>
-
-        <section class="right-pane">
-            
-            <div class="impact-stats fade-in-section">
-                <div class="stat-item">
-                    <div class="stat-number">15+</div>
-                    <div class="stat-label">Years Experience</div>
+            <div class="hero-stats">
+                <div class="hero-stat">
+                    <div class="hero-stat-value">15+</div>
+                    <div class="hero-stat-label">Years Experience</div>
                 </div>
-                <div class="stat-item">
-                    <div class="stat-number">C-Level</div>
-                    <div class="stat-label">Executive Advisory</div>
+                <div class="hero-stat">
+                    <div class="hero-stat-value">C-Level</div>
+                    <div class="hero-stat-label">Executive Advisory</div>
                 </div>
-                <div class="stat-item">
-                    <div class="stat-number">100%</div>
-                    <div class="stat-label">Enterprise Delivery</div>
-                </div>
-            </div>
-
-            <div class="pillar-card fade-in-section">
-                <span class="pillar-number">01</span>
-                <h2 class="pillar-title">Practice Strategy and GTM Leadership</h2>
-                <p class="pillar-desc">
-                    A proven leader in designing and executing robust Go-To-Market initiatives. Leveraged deep industry experience to build a specialized enterprise service offering from the ground up at NTT DATA, and subsequently spearheaded complex partner strategies at Atlassian, converting technical innovation into scalable, market-ready, and revenue-generating solutions.
-                </p>
-            </div>
-
-            <div class="pillar-card fade-in-section">
-                <span class="pillar-number">02</span>
-                <h2 class="pillar-title">Enterprise AI and Platforms Architecture</h2>
-                <p class="pillar-desc">
-                    Specialized architect spanning AIOps, Enterprise Service Management (ESM), and modern cloud infrastructure. Expert in advising enterprise clients and translating complex, often fragmented, operational workflows into high-performing, automated, and horizontally scalable digital systems that meet rigorous compliance standards.
-                </p>
-            </div>
-
-            <div class="pillar-card fade-in-section">
-                <span class="pillar-number">03</span>
-                <h2 class="pillar-title">Executive Advisory and Deal Strategy</h2>
-                <p class="pillar-desc">
-                    Adept at navigating high-stakes business environments, serving as a trusted advisor to C-Suite stakeholders, particularly CIOs. Accomplished in winning high-value, competitive enterprise deals and guiding large organizations through multi-platform digital transformation journeys that align cutting-edge technology with strategic business outcomes.
-                </p>
-            </div>
-
-            <div class="credentials-section fade-in-section">
-                <h2 class="section-header">Licenses & Certifications</h2>
-                <div class="credentials-grid">
-                    <div class="credential-card">
-                        <div class="cred-title">ITIL Managing Professional (v4 & v5)</div>
-                        <div class="cred-org">Axelos</div>
-                    </div>
-                    <div class="credential-card">
-                        <div class="cred-title">ServiceNow Consulting & Architecture</div>
-                        <div class="cred-org">ServiceNow</div>
-                    </div>
-                    <div class="credential-card">
-                        <div class="cred-title">Atlassian ACP / ACA Platform Expertise</div>
-                        <div class="cred-org">Atlassian</div>
-                    </div>
-                    <div class="credential-card">
-                        <div class="cred-title">Enterprise AI Strategy & Adoption</div>
-                        <div class="cred-org">Executive Specialization</div>
-                    </div>
+                <div class="hero-stat">
+                    <div class="hero-stat-value">100%</div>
+                    <div class="hero-stat-label">Enterprise Delivery</div>
                 </div>
             </div>
+        </div>
+    </section>
 
-            <div class="quote-block fade-in-section">
-                <p class="quote-text">"Digital transformation isn't just about implementing technology; it's about architecting intelligent platforms that empower people, streamline workflows, and drive measurable business outcomes at an enterprise scale."</p>
-                <div class="quote-author">— Tanushree Panigrahy</div>
+    <div class="section-divider"></div>
+
+    <!-- EXPERTISE / PILLARS -->
+    <section class="section" id="expertise">
+        <span class="section-label reveal">Core Expertise</span>
+        <h2 class="section-title reveal">Strategic Capabilities</h2>
+        <p class="section-subtitle reveal">Three pillars that define my approach to enterprise transformation.</p>
+        <div class="pillars-grid">
+            <div class="pillar-card reveal reveal-delay-1">
+                <div class="pillar-icon pillar-icon-1">&#9881;</div>
+                <h3>Practice Strategy &amp; GTM Leadership</h3>
+                <p>Designing and executing Go-To-Market initiatives. Built a specialized enterprise service offering at NTT DATA and spearheaded partner strategies at Atlassian, converting technical innovation into scalable, revenue-generating solutions.</p>
             </div>
+            <div class="pillar-card reveal reveal-delay-2">
+                <div class="pillar-icon pillar-icon-2">&#9729;</div>
+                <h3>Enterprise AI &amp; Platform Architecture</h3>
+                <p>Spanning AIOps, Enterprise Service Management, and modern cloud infrastructure. Translating complex operational workflows into high-performing, automated, and horizontally scalable digital systems meeting rigorous compliance standards.</p>
+            </div>
+            <div class="pillar-card reveal reveal-delay-3">
+                <div class="pillar-icon pillar-icon-3">&#9733;</div>
+                <h3>Executive Advisory &amp; Deal Strategy</h3>
+                <p>Trusted advisor to C-Suite stakeholders and CIOs. Winning high-value competitive enterprise deals and guiding organizations through multi-platform digital transformation journeys aligned with strategic business outcomes.</p>
+            </div>
+        </div>
+    </section>
 
-        </section>
-    </main>
+    <div class="section-divider"></div>
+
+    <!-- CREDENTIALS -->
+    <section class="section" id="credentials">
+        <span class="section-label reveal">Professional Standing</span>
+        <h2 class="section-title reveal">Licenses &amp; Certifications</h2>
+        <p class="section-subtitle reveal">Industry-recognized credentials validating deep technical and strategic expertise.</p>
+        <div class="credentials-grid">
+            <div class="credential-card reveal reveal-delay-1">
+                <div class="cred-badge">&#127941;</div>
+                <h4>ITIL Managing Professional (v4 &amp; v5)</h4>
+                <div class="cred-org">Axelos</div>
+            </div>
+            <div class="credential-card reveal reveal-delay-1">
+                <div class="cred-badge">&#9889;</div>
+                <h4>ServiceNow Consulting &amp; Architecture</h4>
+                <div class="cred-org">ServiceNow</div>
+            </div>
+            <div class="credential-card reveal reveal-delay-2">
+                <div class="cred-badge">&#128736;</div>
+                <h4>Atlassian ACP / ACA Platform Expertise</h4>
+                <div class="cred-org">Atlassian</div>
+            </div>
+            <div class="credential-card reveal reveal-delay-3">
+                <div class="cred-badge">&#129302;</div>
+                <h4>Enterprise AI Strategy &amp; Adoption</h4>
+                <div class="cred-org">Executive Specialization</div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- BLOG -->
+    <section class="section" id="blog">
+        <span class="section-label reveal">Thought Leadership</span>
+        <h2 class="section-title reveal">Blog &amp; Insights</h2>
+        <p class="section-subtitle reveal">Perspectives on platform strategy, AI adoption, and enterprise digital transformation.</p>
+        <div class="blog-grid">
+            <!-- Blog Card 1 -->
+            <div class="blog-card reveal reveal-delay-1" onclick="openModal('blog1')">
+                <div class="blog-card-img blog-card-img-1"><span>&#128161;</span></div>
+                <div class="blog-card-body">
+                    <span class="blog-tag tag-ai">AI Strategy</span>
+                    <h3>Why AIOps Is the Future of Enterprise Service Management</h3>
+                    <p>How intelligent automation is reshaping IT operations and driving measurable outcomes across enterprises.</p>
+                </div>
+                <div class="blog-card-footer">
+                    <span class="blog-date">Coming Soon</span>
+                    <span class="blog-read-more">Read Article &rarr;</span>
+                </div>
+            </div>
+            <!-- Blog Card 2 -->
+            <div class="blog-card reveal reveal-delay-2" onclick="openModal('blog2')">
+                <div class="blog-card-img blog-card-img-2"><span>&#127760;</span></div>
+                <div class="blog-card-body">
+                    <span class="blog-tag tag-platform">Platform Strategy</span>
+                    <h3>Building a Platform Practice from Zero to Scale</h3>
+                    <p>Lessons learned building an enterprise service offering from the ground up and scaling it to a global practice.</p>
+                </div>
+                <div class="blog-card-footer">
+                    <span class="blog-date">Coming Soon</span>
+                    <span class="blog-read-more">Read Article &rarr;</span>
+                </div>
+            </div>
+            <!-- Blog Card 3 -->
+            <div class="blog-card reveal reveal-delay-3" onclick="openModal('blog3')">
+                <div class="blog-card-img blog-card-img-3"><span>&#128640;</span></div>
+                <div class="blog-card-body">
+                    <span class="blog-tag tag-leadership">Leadership</span>
+                    <h3>The CIO Whisperer: Navigating C-Suite Digital Conversations</h3>
+                    <p>Strategies for building trust with executive stakeholders and driving technology decisions at the highest level.</p>
+                </div>
+                <div class="blog-card-footer">
+                    <span class="blog-date">Coming Soon</span>
+                    <span class="blog-read-more">Read Article &rarr;</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Modals -->
+    <div class="modal-overlay" id="blog1Modal">
+        <div class="modal">
+            <div class="modal-header-img blog-card-img-1">
+                <span style="font-size:4rem;opacity:0.3;">&#128161;</span>
+                <button class="modal-close" onclick="closeModal('blog1')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <span class="blog-tag tag-ai">AI Strategy</span>
+                <h2>Why AIOps Is the Future of Enterprise Service Management</h2>
+                <div class="modal-meta">By Tanushree Panigrahy &bull; Coming Soon</div>
+                <div class="blog-content">
+                    <p>The convergence of artificial intelligence and IT operations is redefining how enterprises manage services at scale. AIOps represents a paradigm shift from reactive incident management to proactive, predictive operations.</p>
+                    <h3>The Evolution of ITSM</h3>
+                    <p>Traditional IT Service Management relied on manual processes, ticket queues, and human-driven decision-making. As enterprises scale their digital infrastructure, this model becomes unsustainable. AIOps introduces machine learning and automation to process vast volumes of operational data in real-time.</p>
+                    <h3>Key Benefits for Enterprise</h3>
+                    <p>Organizations adopting AIOps see measurable improvements: reduced mean-time-to-resolution, fewer escalations, improved SLA compliance, and significant cost optimization. The key is aligning AIOps adoption with existing ITSM frameworks like ITIL v4.</p>
+                    <p>The future belongs to organizations that can seamlessly blend intelligent automation with human expertise to deliver enterprise services at unprecedented speed and quality.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="blog2Modal">
+        <div class="modal">
+            <div class="modal-header-img blog-card-img-2">
+                <span style="font-size:4rem;opacity:0.3;">&#127760;</span>
+                <button class="modal-close" onclick="closeModal('blog2')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <span class="blog-tag tag-platform">Platform Strategy</span>
+                <h2>Building a Platform Practice from Zero to Scale</h2>
+                <div class="modal-meta">By Tanushree Panigrahy &bull; Coming Soon</div>
+                <div class="blog-content">
+                    <p>Building a platform practice from scratch requires a unique blend of technical vision, market understanding, and relentless execution. Having built and scaled enterprise service offerings, here are the critical lessons learned.</p>
+                    <h3>Starting with the Problem</h3>
+                    <p>Every successful practice starts with a deep understanding of customer pain points. In the enterprise space, this means understanding the complexities of multi-platform environments, compliance requirements, and the constant pressure to do more with less.</p>
+                    <h3>From Concept to Revenue</h3>
+                    <p>The journey from concept to revenue-generating practice involves defining clear service offerings, building repeatable delivery frameworks, investing in team capabilities, and establishing strong partner ecosystems. Each phase requires different leadership skills and strategic focus.</p>
+                    <p>The result is a scalable practice that delivers consistent value to enterprise clients while driving sustainable growth for the organization.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="blog3Modal">
+        <div class="modal">
+            <div class="modal-header-img blog-card-img-3">
+                <span style="font-size:4rem;opacity:0.3;">&#128640;</span>
+                <button class="modal-close" onclick="closeModal('blog3')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <span class="blog-tag tag-leadership">Leadership</span>
+                <h2>The CIO Whisperer: Navigating C-Suite Digital Conversations</h2>
+                <div class="modal-meta">By Tanushree Panigrahy &bull; Coming Soon</div>
+                <div class="blog-content">
+                    <p>Engaging with C-Suite executives, particularly CIOs, requires a fundamentally different communication approach than traditional technical consulting. It's about speaking the language of business outcomes, not technology features.</p>
+                    <h3>Building Executive Trust</h3>
+                    <p>Trust at the executive level is built through demonstrated understanding of business challenges, consistent delivery, and the ability to translate complex technical concepts into strategic value propositions that resonate at the board level.</p>
+                    <h3>The Art of the Deal</h3>
+                    <p>High-value enterprise deals are won through a combination of deep technical credibility, strategic vision, and the ability to navigate complex organizational dynamics. Each stakeholder has different priorities, and successful deal strategy aligns technology solutions with individual and organizational objectives.</p>
+                    <p>The most effective advisors are those who can bridge the gap between technology potential and business reality, helping leaders make informed decisions that drive lasting transformation.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- VIDEOS / DEMOS -->
+    <section class="section" id="videos">
+        <span class="section-label reveal">Watch &amp; Learn</span>
+        <h2 class="section-title reveal">Demo Videos &amp; Talks</h2>
+        <p class="section-subtitle reveal">Platform demos, conference talks, and deep-dives into enterprise technology solutions.</p>
+        <div class="videos-grid">
+            <!-- Video 1 -->
+            <div class="video-card reveal reveal-delay-1">
+                <div class="video-embed">
+                    <!-- Replace YOUR_VIDEO_ID_1 with actual YouTube video ID -->
+                    <div class="video-placeholder">
+                        <div class="play-icon">&#9654;</div>
+                        <span style="font-size:0.85rem;">Replace with YouTube embed</span>
+                    </div>
+                    <!-- <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID_1" title="Demo Video 1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
+                </div>
+                <div class="video-card-body">
+                    <h3>Enterprise Platform Demo</h3>
+                    <p>Walkthrough of an end-to-end enterprise service management implementation.</p>
+                </div>
+            </div>
+            <!-- Video 2 -->
+            <div class="video-card reveal reveal-delay-2">
+                <div class="video-embed">
+                    <div class="video-placeholder">
+                        <div class="play-icon">&#9654;</div>
+                        <span style="font-size:0.85rem;">Replace with YouTube embed</span>
+                    </div>
+                    <!-- <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID_2" title="Demo Video 2" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
+                </div>
+                <div class="video-card-body">
+                    <h3>AIOps in Action</h3>
+                    <p>Live demonstration of AI-driven operations and intelligent automation workflows.</p>
+                </div>
+            </div>
+            <!-- Video 3 -->
+            <div class="video-card reveal reveal-delay-1">
+                <div class="video-embed">
+                    <div class="video-placeholder">
+                        <div class="play-icon">&#9654;</div>
+                        <span style="font-size:0.85rem;">Replace with YouTube embed</span>
+                    </div>
+                    <!-- <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID_3" title="Conference Talk" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
+                </div>
+                <div class="video-card-body">
+                    <h3>Conference Talk: Digital Transformation</h3>
+                    <p>Keynote on architecting intelligent platforms for enterprise-scale outcomes.</p>
+                </div>
+            </div>
+            <!-- Video 4 -->
+            <div class="video-card reveal reveal-delay-2">
+                <div class="video-embed">
+                    <div class="video-placeholder">
+                        <div class="play-icon">&#9654;</div>
+                        <span style="font-size:0.85rem;">Replace with YouTube embed</span>
+                    </div>
+                    <!-- <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID_4" title="Platform Strategy Talk" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
+                </div>
+                <div class="video-card-body">
+                    <h3>Platform Strategy Deep-Dive</h3>
+                    <p>Building and scaling enterprise platform practices from concept to delivery.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- QUOTE -->
+    <section class="quote-section reveal" id="quote">
+        <p class="quote-large">"Digital transformation isn't just about implementing technology; it's about architecting intelligent platforms that empower people, streamline workflows, and drive measurable business outcomes at an enterprise scale."</p>
+        <div class="quote-author">&mdash; Tanushree Panigrahy</div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- FOOTER -->
+    <footer class="footer" id="contact">
+        <div class="footer-links">
+            <a href="#">LinkedIn</a>
+            <a href="#">Email</a>
+            <a href="#">Download Resume</a>
+        </div>
+        <p>&copy; 2026 Tanushree Panigrahy. All rights reserved.</p>
+    </footer>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const observerOptions = {
-                root: null,
-                rootMargin: "0px",
-                threshold: 0.1
-            };
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            navbar.classList.toggle('scrolled', window.scrollY > 50);
+        });
 
-            const observer = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('is-visible');
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, observerOptions);
+        // Mobile nav toggle
+        function toggleNav() {
+            document.getElementById('navLinks').classList.toggle('open');
+        }
 
-            const sections = document.querySelectorAll('.fade-in-section');
-            sections.forEach(section => {
-                observer.observe(section);
+        // Close mobile nav on link click
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('navLinks').classList.remove('open');
             });
         });
+
+        // Scroll reveal animations
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+        document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+        // Blog modal
+        function openModal(id) {
+            document.getElementById(id + 'Modal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal(id) {
+            document.getElementById(id + 'Modal').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Close modal on overlay click
+        document.querySelectorAll('.modal-overlay').forEach(overlay => {
+            overlay.addEventListener('click', (e) => {
+                if (e.target === overlay) {
+                    overlay.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            });
+        });
+
+        // Close modal on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                document.querySelectorAll('.modal-overlay.active').forEach(m => {
+                    m.classList.remove('active');
+                });
+                document.body.style.overflow = '';
+            }
+        });
     </script>
+
 </body>
 </html>
